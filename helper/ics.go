@@ -15,8 +15,8 @@ type lesson struct {
 	name    string
 	room    string
 	teacher string
-	start   *time.Time
-	end     *time.Time
+	start   string
+	end     string
 }
 
 func GetIcsFile(course string) (string, error) {
@@ -38,17 +38,28 @@ func GetIcsFile(course string) (string, error) {
 	return string(b), nil
 }
 
-func ParseIcsFile(ics *gocal.Gocal) []lesson {
+func ParseIcsFile(file string) []lesson {
+	houresLeft := 24 - time.Now().Hour()
+	start, end := time.Now(), time.Now().Add(time.Hour*time.Duration(houresLeft))
+
+	ics := gocal.NewParser(strings.NewReader(file))
+	ics.Start, ics.End = &start, &end
+	ics.Parse()
+
 	array := make([]lesson, len(ics.Events))
+
 	for key, e := range ics.Events {
 		split := strings.Split(e.Summary, ";")
+
 		array[key].name = split[1]
 		array[key].teacher = split[2]
+
 		if len(split) == 4 {
 			array[key].room = split[3]
 		}
-		array[key].start = e.Start
-		array[key].end = e.End
+
+		array[key].start = e.Start.Format("15:04")
+		array[key].end = e.End.Format("15:04")
 	}
 	return array
 }
