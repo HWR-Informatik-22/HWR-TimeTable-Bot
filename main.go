@@ -26,10 +26,26 @@ func main() {
 	c.Start, c.End = &start, &end
 	c.Parse()
 
-	for _, e := range c.Events {
-		fmt.Printf("%s on %s", e.Summary, e.Start)
+	type lesson struct {
+		name    string
+		room    string
+		teacher string
+		start   *time.Time
+		end     *time.Time
 	}
 
+	//array := make([]lesson, len(c.Events))
+	for _, e := range c.Events {
+		fmt.Println("%v", strings.SplitN(e.Summary, ";", 4))
+		/*
+			array[key].name = strings.SplitN(e.Summary, ";", 4)[1]
+			array[key].teacher = strings.SplitN(e.Summary, ";", 4)[3]
+			array[key].start = e.Start
+			array[key].end = e.End
+		*/
+
+	}
+	//fmt.Printf("%v", array[0])
 	/*
 	   ics, err := http.Get(os.Getenv("BASE_ICS_URL"))
 
