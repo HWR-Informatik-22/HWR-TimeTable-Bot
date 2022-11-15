@@ -1,4 +1,4 @@
-module hwr-timetable-bot
+module hwrbot
 
 go 1.19
 
