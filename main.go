@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"hwrbot/helper"
 
+	"github.com/apognu/gocal"
 	"github.com/joho/godotenv"
 )
 
@@ -14,7 +16,15 @@ func main() {
 		panic(err)
 	}
 
-	println(file)
+	//start, end := time.Now(), time.Now().Add(12*30*24*time.Hour)
+
+	c := gocal.NewParser(file)
+	//c.Start, c.End = &start, &end
+	c.Parse()
+
+	for _, e := range c.Events {
+		fmt.Printf("%s on %s by %s", e.Summary, e.Start, e.Organizer.Cn)
+	}
 
 	/*
 	   ics, err := http.Get(os.Getenv("BASE_ICS_URL"))
