@@ -8,7 +8,13 @@ import (
 
 func main() {
 	godotenv.Load(".env")
-	helper.GetIcsFile("kursa")
+	file, err := helper.GetIcsFile("kursa")
+
+	if err != nil {
+		panic(err)
+	}
+
+	println(file)
 
 	/*
 	   ics, err := http.Get(os.Getenv("BASE_ICS_URL"))
