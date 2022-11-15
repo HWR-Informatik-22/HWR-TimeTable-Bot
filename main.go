@@ -1,12 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"hwrbot/helper"
-	"strings"
-	"time"
 
-	"github.com/apognu/gocal"
 	"github.com/joho/godotenv"
 )
 
@@ -20,7 +16,7 @@ func main() {
 
 	//println(file)
 
-	start, end := time.Now(), time.Now().Add(12*30*24*time.Hour)
+	/*start, end := time.Now(), time.Now().Add(12*30*24*time.Hour)
 
 	c := gocal.NewParser(strings.NewReader(file))
 	c.Start, c.End = &start, &end
@@ -28,7 +24,10 @@ func main() {
 
 	for _, e := range c.Events {
 		fmt.Printf("%s on %s", e.Summary, e.Start)
-	}
+	}*/
+
+	_ = file
+	println("Bot started")
 
 	/*
 	   ics, err := http.Get(os.Getenv("BASE_ICS_URL"))
