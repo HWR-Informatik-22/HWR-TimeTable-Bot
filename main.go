@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"hwrbot/helper"
 
 	"github.com/joho/godotenv"
@@ -28,6 +29,7 @@ func main() {
 
 	_ = file
 	println("Bot started")
+	fmt.Scanln()
 
 	/*
 	   ics, err := http.Get(os.Getenv("BASE_ICS_URL"))
