@@ -11,7 +11,7 @@ import (
 	"github.com/apognu/gocal"
 )
 
-type lesson struct {
+type Lesson struct {
 	name    string
 	room    string
 	teacher string
