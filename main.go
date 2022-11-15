@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"hwrbot/helper"
+	"strings"
+	"time"
 
 	"github.com/apognu/gocal"
 	"github.com/joho/godotenv"
@@ -16,14 +18,16 @@ func main() {
 		panic(err)
 	}
 
-	//start, end := time.Now(), time.Now().Add(12*30*24*time.Hour)
+	//println(file)
 
-	c := gocal.NewParser(file)
-	//c.Start, c.End = &start, &end
+	start, end := time.Now(), time.Now().Add(12*30*24*time.Hour)
+
+	c := gocal.NewParser(strings.NewReader(file))
+	c.Start, c.End = &start, &end
 	c.Parse()
 
 	for _, e := range c.Events {
-		fmt.Printf("%s on %s by %s", e.Summary, e.Start, e.Organizer.Cn)
+		fmt.Printf("%s on %s", e.Summary, e.Start)
 	}
 
 	/*

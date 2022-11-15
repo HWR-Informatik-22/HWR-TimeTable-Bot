@@ -7,14 +7,21 @@ import (
 	"os"
 )
 
-func GetIcsFile(course string) (io.ReadCloser, error) {
+func GetIcsFile(course string) (string, error) {
 	url := fmt.Sprintf("%s%s", os.Getenv("BASE_ICS_URL"), course)
-
-	file, err := http.Get(url)
+	response, err := http.Get(url)
 
 	if err != nil {
-		return file.Request.Body, err
+		return "", err
 	}
 
-	return file.Request.Body, nil
+	defer response.Body.Close()
+
+	b, err := io.ReadAll(response.Body)
+
+	if err != nil {
+		return "", err
+	}
+
+	return string(b), nil
 }
