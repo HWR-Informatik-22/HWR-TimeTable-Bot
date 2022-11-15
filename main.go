@@ -27,4 +27,6 @@ func main() {
 	c.Parse()
 
 	fmt.Print(helper.ParseIcsFile(c))
+
+	fmt.Scanln()
 }
