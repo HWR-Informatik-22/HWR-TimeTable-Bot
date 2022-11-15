@@ -15,4 +15,5 @@ func main() {
 		panic(err)
 	}
 	fmt.Print(helper.ParseIcsFile(file))
+	fmt.Scanln()
 }
