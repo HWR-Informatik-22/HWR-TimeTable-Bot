@@ -38,28 +38,31 @@ func GetIcsFile(course string) (string, error) {
 	return string(b), nil
 }
 
-func ParseIcsFile(file string) []lesson {
-	houresLeft := 24 - time.Now().Hour()
+func ParseIcsFile(file string) []Lesson {
+	houresLeft := 24 //- time.Now().Hour()
 	start, end := time.Now(), time.Now().Add(time.Hour*time.Duration(houresLeft))
 
 	ics := gocal.NewParser(strings.NewReader(file))
 	ics.Start, ics.End = &start, &end
 	ics.Parse()
 
-	array := make([]lesson, len(ics.Events))
-
+	array := make([]Lesson, len(ics.Events))
 	for key, e := range ics.Events {
 		split := strings.Split(e.Summary, ";")
 
 		array[key].name = split[1]
 		array[key].teacher = split[2]
 
-		if len(split) == 4 {
+		if split[3] != "ONLINE" {
+			array[key].room = e.Location
+		}
+		if split[3] == "ONLINE" {
 			array[key].room = split[3]
 		}
 
 		array[key].start = e.Start.Format("15:04")
 		array[key].end = e.End.Format("15:04")
+		fmt.Printf(split[3])
 	}
 	return array
 }
