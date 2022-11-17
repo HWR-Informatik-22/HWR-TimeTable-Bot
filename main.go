@@ -22,25 +22,26 @@ func main() {
 	discord.Open()
 
 	s := gocron.NewScheduler(time.UTC)
-	s.Cron(os.Getenv("EXECUTE_INTERVAL")).Do(sendTimeTable, discord, "kursa")
-	s.Cron(os.Getenv("EXECUTE_INTERVAL")).Do(sendTimeTable, discord, "kursb")
+	s.Cron(os.Getenv("EXECUTE_INTERVAL")).Do(sendTimeTable, discord, []string{"kursa", "kursb"})
 	s.StartBlocking()
 }
 
-func sendTimeTable(discord *discordgo.Session, course string) {
-	content, err := helper.GetIcsContent(course)
-	if err != nil {
-		panic(err)
-	}
+func sendTimeTable(discord *discordgo.Session, courses []string) {
+	for _, course := range courses {
+		content, err := helper.GetIcsContent(course)
+		if err != nil {
+			panic(err)
+		}
 
-	lessons, err := helper.ParseIcsContent(content)
-	if err != nil {
-		panic(err)
-	}
+		lessons, err := helper.ParseIcsContent(content)
+		if err != nil {
+			panic(err)
+		}
 
-	embed := helper.CreateEmbed(lessons, course)
-	_, err = discord.ChannelMessageSendEmbed(os.Getenv("DISCORD_CHANNEL_ID"), embed)
-	if err != nil {
-		panic(err)
+		embed := helper.CreateEmbed(lessons, course)
+		_, err = discord.ChannelMessageSendEmbed(os.Getenv("DISCORD_CHANNEL_ID"), embed)
+		if err != nil {
+			panic(err)
+		}
 	}
 }
