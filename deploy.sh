@@ -1,2 +1,2 @@
-docker build -t hwrbot:latest build/docker
-docker run --rm --env-file .env -it hwrbot
+docker build -t hwr-timetable-bot:latest .
+docker run --rm --env-file .env -it hwr-timetable-bot
