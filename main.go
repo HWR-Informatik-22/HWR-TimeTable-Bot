@@ -22,11 +22,11 @@ func main() {
 	discord.Open()
 
 	s := gocron.NewScheduler(time.UTC)
-	s.Cron(os.Getenv("EXECUTE_INTERVAL")).Do(sendTimeTable, discord, []string{"kursa", "kursb"})
+	s.Cron(os.Getenv("EXECUTE_INTERVAL")).Do(sendTimeTable, discord, "kursa", "kursb")
 	s.StartBlocking()
 }
 
-func sendTimeTable(discord *discordgo.Session, courses []string) {
+func sendTimeTable(discord *discordgo.Session, courses ...string) {
 	for _, course := range courses {
 		content, err := helper.GetIcsContent(course)
 		if err != nil {
