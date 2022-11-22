@@ -20,6 +20,7 @@ func main() {
 		panic(err)
 	}
 	discord.Open()
+	discord.UpdateGameStatus(0, os.Getenv("DISCORD_BOT_GAME"))
 
 	s := gocron.NewScheduler(time.UTC)
 	s.Cron(os.Getenv("EXECUTE_INTERVAL")).Do(sendTimeTable, discord, []string{"kursa", "kursb"})
