@@ -39,6 +39,10 @@ func sendTimeTable(discord *discordgo.Session, courses []string) {
 			panic(err)
 		}
 
+		if len(*lessons) == 0 {
+			return
+		}
+
 		embed := helper.CreateEmbed(lessons, course)
 		_, err = discord.ChannelMessageSendEmbed(os.Getenv("DISCORD_CHANNEL_ID"), embed)
 		if err != nil {
