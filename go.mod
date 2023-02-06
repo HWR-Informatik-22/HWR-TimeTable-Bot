@@ -6,7 +6,7 @@ require (
 	github.com/arran4/golang-ical v0.0.0-20220517104411-fd89fefb0182
 	github.com/bwmarrin/discordgo v0.27.0
 	github.com/go-co-op/gocron v1.18.0
-	github.com/joho/godotenv v1.4.0
+	github.com/joho/godotenv v1.5.1
 )
 
 require (
