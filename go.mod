@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/arran4/golang-ical v0.0.0-20230213232137-07c6aad5e4f0
 	github.com/bwmarrin/discordgo v0.27.0
-	github.com/go-co-op/gocron v1.18.0
+	github.com/go-co-op/gocron v1.19.0
 	github.com/joho/godotenv v1.5.1
 )
 
