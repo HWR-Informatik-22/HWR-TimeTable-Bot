@@ -3,7 +3,7 @@ module hwrbot
 go 1.19
 
 require (
-	github.com/arran4/golang-ical v0.2.3
+	github.com/arran4/golang-ical v0.2.6
 	github.com/bwmarrin/discordgo v0.27.1
 	github.com/go-co-op/gocron v1.37.0
 	github.com/joho/godotenv v1.5.1
